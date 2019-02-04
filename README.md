@@ -44,3 +44,8 @@ The entire dataset comprises of 50281 genes from 377 specimens. The 377 specimen
 4. The model with the lowest RMSE value will be validated on the test data again.
 
 Finally, the entire model will be validated in a different set of MRI and genetic data, before embedding the model onto a user-friendly interface.
+
+### References
+
+A prospective study of cognitive function and onset of dementia in cognitively healthy elders.
+Rubin, EH, Storandt, M, Miller, JP, Kinscherf, DA, Grant, EA, Morris, JC, Berg, L, 1998. Arch Neurol. 55, 395-401. PMID: 9520014
