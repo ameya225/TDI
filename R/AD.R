@@ -6,16 +6,16 @@ require("ggpubr")
 
 # Read data
 
-protpath <- read.csv("AD/ProteinAndPathologyQuantifications.csv")
-donor <- read.csv("AD/DonorInformation.csv")
-stains <- read.csv("AD/DescriptionOfStains.csv")
-tbi <- read.csv("AD/tbi_data_files.csv")
-conversion_code <- read.csv("AD/ConversionCode_AllenAgingDementiaTBI.csv")
+protpath <- read.csv("Allen_Brain_Atlas/AD/ProteinAndPathologyQuantifications.csv")
+donor <- read.csv("Allen_Brain_Atlas/AD/DonorInformation.csv")
+stains <- read.csv("Allen_Brain_Atlas/AD/DescriptionOfStains.csv")
+tbi <- read.csv("Allen_Brain_Atlas/AD/tbi_data_files.csv")
+conversion_code <- read.csv("Allen_Brain_Atlas/AD/ConversionCode_AllenAgingDementiaTBI.csv")
 
 # Gene expression data
 
-genes <- read.csv("AD/gene_expression_matrix_2016-03-03/rows-genes.csv")
-samples <- read.csv("AD/gene_expression_matrix_2016-03-03/columns-samples.csv")
+genes <- read.csv("Allen_Brain_Atlas/AD/gene_expression_matrix_2016-03-03/rows-genes.csv")
+samples <- read.csv("Allen_Brain_Atlas/AD/gene_expression_matrix_2016-03-03/columns-samples.csv")
 class(samples$rnaseq_profile_id) <- "character"
 samples_relev <- samples[,c("rnaseq_profile_id", "specimen_name")]
 samples_relev <- dplyr::left_join(samples_relev, conversion_code, by="specimen_name")
