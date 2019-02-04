@@ -1,0 +1,142 @@
+---
+title: "Unsupervised clustering of gene expression data and identifying relevant features"
+output:
+  pdf_document: default
+  html_notebook: default
+Author: Ameya Kulkarni
+---
+
+```{r,warning=FALSE, message=FALSE}
+require("here")
+require("methods")
+require("edgeR")
+require("ggplot2")
+require("ggpubr")
+require("DataExplorer")
+```
+
+All the metadata and gene expression data is read in.
+
+```{r}
+setwd("~/Documents/TDI/Challenge/")
+protpath <- read.csv("AD/ProteinAndPathologyQuantifications.csv")
+donor <- read.csv("AD/DonorInformation.csv")
+stains <- read.csv("AD/DescriptionOfStains.csv")
+tbi <- read.csv("AD/tbi_data_files.csv")
+conversion_code <- read.csv("AD/ConversionCode_AllenAgingDementiaTBI.csv")
+genes <- read.csv("AD/Gene_Expression_Matrix/rows-genes.csv")
+samples <- read.csv("AD/Gene_Expression_Matrix/columns-samples.csv")
+class(samples$rnaseq_profile_id) <- "character"
+samples_relev <- samples[,c("rnaseq_profile_id", "specimen_name")]
+samples_relev <- dplyr::left_join(samples_relev, conversion_code, by="specimen_name")
+samples_relev <- samples_relev[,c("rnaseq_profile_id", "specimen_name", "folderName")]
+
+fpkm <- read.csv("AD/Gene_Expression_Matrix/fpkm_table_normalized.csv")
+colnames(fpkm) <- gsub(colnames(fpkm), pattern = "X", replacement = "")
+colnames(fpkm)[1] <- "gene_id"
+fpkm <- fpkm[complete.cases(fpkm),]
+```
+
+Obtain gene symbols in place of Gene ids
+
+```{r}
+fpkm <- dplyr::left_join(fpkm, genes, by="gene_id")
+rownames(fpkm) <- fpkm$gene_symbol
+fpkm <- fpkm[,-c(1,379:382)]
+```
+
+Convert the gene expression object into a DGEList object from edgeR package to filter for lowly expressed genes and to construct a linear model with relevant covariates
+
+```{r}
+keep <- filterByExpr(fpkm_t)
+fpkm_t <- fpkm_t[keep,]
+fpkm <- as.data.frame(t(fpkm_t$counts))
+```
+
+Create multiple metadata vectors to adjust for, during modeling
+
+```{r}
+name <- factor(unlist(lapply(strsplit(colnames(fpkm_t$counts), split = "[_]"), function(x){x[1]})))
+name <- factor(unlist(lapply(strsplit(as.character(name), split = "[.]"), function(x){paste(x[1], x[2], x[3], sep = ".")})))
+structure <- factor(unlist(lapply(strsplit(colnames(fpkm_t$counts), split = "[_]"), function(x){x[2]})))
+fpkm <- data.frame(fpkm, name, structure)
+fpkm <- dplyr::left_join(fpkm, donor, by="name")
+```
+
+The fpkm dataframe contains all the relevant metadata information.
+
+```{r}
+rownames(fpkm) <- foldernames
+sex <- fpkm$sex
+diagnosis <- fpkm$act_demented
+race <- fpkm$race
+tbi <- fpkm$ever_tbi_w_loc
+```
+
+
+Dimensional reduction on the filtered dataset using Principal Components Analysis (PCA). This helps us to understand how the data is clustering in an unsupervised manner. Each point on the PCA plot is a sample. The samples are color coded by specific variables.
+
+```{r}
+fpkm_gene <- fpkm[1:5419]
+pca <- prcomp(fpkm_gene, center = T, scale. = T)
+pca.score <- as.data.frame(pca$x)
+pca.plot <- ggplot(data = pca.score, aes(x = PC1, y = PC2, colour= structure)) + geom_point() + scale_shape_manual(1:24)
+pca.plot
+```
+
+The data is very noisy, but it is tending towards clustering by the structure of the brain from which the tissue is obtained.
+
+The top 200 genes with the most different variance are used to filter the data furthermore. The exploratory data analysis might be more coherent when the genes responsible for the dispersion in the data are selected to separate the clusters.
+
+```{r}
+genes.var <- apply(t(fpkm_gene), 1, var)
+genes.var.select <- order(-genes.var)[1:200]
+fpkm.t <- as.data.frame(t(fpkm))
+fpkm.ts <- fpkm.t[genes.var.select,]
+fpkm.ts <- as.matrix(fpkm.ts)
+fpkm.ts <- apply(fpkm.ts, 1, as.numeric)
+```
+
+PCA is carried out on the selected subset of most differentially variant genes.
+
+```{r}
+pca <- prcomp(fpkm.ts, center = T, scale. = T)
+pca.score <- as.data.frame(pca$x)
+pca.plot <- ggplot(data = pca.score, aes(x = PC1, y = PC2, colour= structure)) + geom_point()
+pca.plot
+```
+
+The samples are now clearly clustering by the structure of the brain from where the tissue is obtained. If the data is colored by dignosis of dementia, the samples aren't clustered.
+
+```{r}
+pca <- prcomp(fpkm.ts, center = T, scale. = T)
+pca.score <- as.data.frame(pca$x)
+pca.plot <- ggplot(data = pca.score, aes(x = PC1, y = PC2, colour= diagnosis)) + geom_point()
+pca.plot
+```
+
+This indicates that the structure is a covariate that needs to be included in the model, in order to adjust for the structure specific effects. This can also be reflective in the imaging data.
+
+Following PCA, I also performed Hierrarchical clustering on the data to explore the relationships between samples. This is also an unsupervised method and can help understand the effects of differentially variant genes on sample clusters.
+
+```{r}
+d <- dist(fpkm_gene)
+hc <- hclust(d, method = "complete")
+plot(hc, labels = diagnosis)
+
+d.ts <- dist(fpkm.ts)
+hc.ts <- hclust(d, method = "complete")
+plot(hc.ts, labels = structure, cex.lab=0.5)
+```
+
+Genes usually do not work in isolation. Multiple genes belonging to similar biological pathways perform similar functions and can be clustered together based on their expression profiles. A correlation plot usually helps visualize relationships between genes. Here, using just the most variant genes, I plotted a correlation plot and although distinct clusters aren't visible, there are 7-10 clusters that can be used together as a composite vector for the prediction model.
+
+```{r}
+plot_correlation(fpkm.ts, "continuous")
+```
+
+
+
+
+
+
