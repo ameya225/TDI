@@ -18,7 +18,6 @@ require("DataExplorer")
 All the metadata and gene expression data is read in.
 
 ```{r}
-setwd("~/Documents/TDI/Challenge/")
 protpath <- read.csv("AD/ProteinAndPathologyQuantifications.csv")
 donor <- read.csv("AD/DonorInformation.csv")
 stains <- read.csv("AD/DescriptionOfStains.csv")
