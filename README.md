@@ -30,6 +30,12 @@ For my proposed project, I propose to create a surrogate variable dementia using
 6. The Keras algorithm will be run- a) Specify architecture; b) Select loss function, optimizer and metrics for goodness-of-fit c) Specify number of epochs, batch size and validation split.
 5. The model will be tested, and the efficacy will be computed based on probabilities of accurate predictions.  
 
+##### Healthy brain MRI
+![Image](https://github.com/ameya225/TDI/blob/master/OASIS/jpg/OAS30001_ses-d243017.jpg)
+
+##### Dementia brain MRI
+![Image](https://github.com/ameya225/TDI/blob/master/OASIS/jpg/OAS30344_ses-d237517.jpg)
+
 #### Genetic and Immunohistochemistry steps 
 The entire dataset comprises of 50281 genes from 377 specimens. The 377 specimens are obtained from 107 unique donors. The gene x donor matrix consists of FPKM-Normalized values (fragment-per-kilobase-per-million). FPKM normalization is a way to normalize gene expression data by gene length (in kilobases) and sequencing library size (total number of RNA molecules sequenced).
 1. The gene expression data and the immunohistochemistry data will be log normalized and z-transformed (scaled using (x-mean)/sd).
@@ -44,3 +50,8 @@ The entire dataset comprises of 50281 genes from 377 specimens. The 377 specimen
 4. The model with the lowest RMSE value will be validated on the test data again.
 
 Finally, the entire model will be validated in a different set of MRI and genetic data, before embedding the model onto a user-friendly interface.
+
+### References
+
+A prospective study of cognitive function and onset of dementia in cognitively healthy elders.
+Rubin, EH, Storandt, M, Miller, JP, Kinscherf, DA, Grant, EA, Morris, JC, Berg, L, 1998. Arch Neurol. 55, 395-401. PMID: 9520014
