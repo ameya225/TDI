@@ -1,7 +1,7 @@
 # The Data Incubator Semifinal challenge
 
 
-This repository contains the proposed project for The Data Incubator Fellowship (Seminfinal challenge).
+This repository contains the project proposal for The Data Incubator Fellowship (Seminfinal challenge).
 
 ## Title: Integration of MRI and genomics data in diagnosing brain aging and Alzheimer’s Disease
 
