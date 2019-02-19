@@ -1,5 +1,4 @@
-# The Data Incubator Semifinal challenge
-
+# The Data Incubator Capstone Project
 
 This repository contains the project proposal for The Data Incubator Fellowship (Semifinal challenge).
 
