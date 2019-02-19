@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- Created by pdf2htmlEX (https://github.com/coolwanglu/pdf2htmlex) -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<link rel="stylesheet" href="base.min.css"/>
+<link rel="stylesheet" href="fancy.min.css"/>
+<link rel="stylesheet" href="main.css"/>
+<script src="compatibility.min.js"></script>
+<script src="theViewer.min.js"></script>
+<script>
+try{
+theViewer.defaultViewer = new theViewer.Viewer({});
+}catch(e){}
+</script>
+<title></title>
+</head>
+<body>
+<div id="sidebar">
+<div id="outline">
+</div>
+</div>
+<div id="page-container">
+<div id="pf1" class="pf w0 h0" data-page-no="1"><div class="pc pc1 w0 h0"><img class="bi x0 y0 w0 h0" alt="" src="bg1.png"/><div class="t m0 x1 h1 y1 ff1 fs0 fc0 sc0 ls0 ws0">MRI + Molecular integration for Alzheimer’s diagnosis</div><div class="t m0 x2 h2 y2 ff2 fs1 fc0 sc0 ls0 ws0">By- Ameya Kulkarni, PhD Candidate (Genetics + Comp Bio)</div><div class="t m0 x3 h3 y3 ff1 fs2 fc0 sc0 ls0 ws0">Current diagnostic method (Physician)<span class="_ _0"> </span>Novel diagnostic method (ML-Data Integration)</div><div class="t m0 x3 h4 y4 ff1 fs3 fc0 sc0 ls0 ws0">Datasets <span class="ff2">(OASIS: </span>4GB<span class="ff2"> of 735 3D MRI + Allen Brain Atlas: <span class="_ _1"></span></span>3TB<span class="ff2"> of RNA-Seq + Protein data 377 samples from </span></div><div class="t m0 x3 h4 y5 ff2 fs3 fc0 sc0 ls0 ws0">5 brain regions)</div><div class="t m0 x3 h5 y6 ff1 fs3 fc0 sc0 ls0 ws0">Preprocessing steps</div><div class="t m0 x4 h4 y7 ff2 fs3 fc0 sc0 ls0 ws0">MRI (Skull stripping, Image restructuring…)</div><div class="t m0 x4 h4 y8 ff2 fs3 fc0 sc0 ls0 ws0">RNA-Seq (Gene alignment, quantification…)</div><div class="t m0 x3 h5 y9 ff1 fs3 fc0 sc0 ls0 ws0">Workflow</div><div class="t m0 x5 h4 ya ff2 fs3 fc0 sc0 ls0 ws0">Clinical Diagnosis</div><div class="t m0 x6 h4 yb ff2 fs3 fc0 sc0 ls0 ws0">MRI<span class="_ _2"> </span>RNA-Seq + Protein</div><div class="t m0 x7 h4 yc ff2 fs3 fc0 sc0 ls0 ws0">Convolution NN<span class="_ _3"> </span>Log regression</div></div><div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div></div>
+<div id="pf2" class="pf w0 h0" data-page-no="2"><div class="pc pc2 w0 h0"><img class="bi x0 y0 w0 h0" alt="" src="bg2.png"/><div class="t m0 x8 h6 yd ff1 fs4 fc0 sc0 ls0 ws0">Gene expression model reveals brain-structure specific heterogeneity </div><div class="t m0 x9 h6 ye ff1 fs4 fc0 sc0 ls0 ws0">and important biological pathways in AD for drug discovery </div><div class="t m0 xa h7 yf ff2 fs2 fc1 sc0 ls0 ws0">50281 genes + 33 proteins</div><div class="t m0 xb h7 y10 ff2 fs2 fc1 sc0 ls0 ws0">Normalized using gene length </div><div class="t m0 xc h7 y11 ff2 fs2 fc1 sc0 ls0 ws0">and sequencing depth + Scaled(Z</div><div class="t m0 xd h7 y12 ff2 fs2 fc1 sc0 ls0 ws0">-score)</div><div class="t m0 xe h7 y13 ff2 fs2 fc1 sc0 ls0 ws0">Unsupervised clustering (PCA + </div><div class="t m0 xf h7 y14 ff2 fs2 fc1 sc0 ls0 ws0">Hierarchical clustering)</div><div class="t m0 xb h7 y15 ff2 fs2 fc1 sc0 ls0 ws0">Identified most variable genes </div><div class="t m0 x10 h7 y16 ff2 fs2 fc1 sc0 ls0 ws0">controlling for mean-variance </div><div class="t m0 x11 h7 y17 ff2 fs2 fc1 sc0 ls0 ws0">relationship (n=1504)</div><div class="t m0 x9 h7 y18 ff2 fs2 fc1 sc0 ls0 ws0">Run a logistic regression model </div></div><div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div></div>
+<div id="pf3" class="pf w0 h0" data-page-no="3"><div class="pc pc3 w0 h0"><img class="bi x0 y0 w0 h0" alt="" src="bg3.png"/><div class="t m0 x12 h8 y19 ff1 fs5 fc0 sc0 ls0 ws0">Pipeline for processing MRI data and novel methods to </div><div class="t m0 x13 h8 y1a ff1 fs5 fc0 sc0 ls0 ws0">integrate with gene expression data</div><div class="t m0 x14 h9 y1b ff2 fs2 fc0 sc0 ls0 ws0">Convert into a matrix <span class="ff3"></span> Vector</div><div class="t m0 x15 h7 y1c ff2 fs2 fc0 sc0 ls0 ws0">Run through a CNN to classify </div><div class="t m0 x16 h7 y1d ff2 fs2 fc0 sc0 ls0 ws0">between AD and no-AD</div><div class="t m0 x17 h7 y1e ff2 fs2 fc2 sc0 ls0 ws0">Map gene expression onto MRI </div><div class="t m0 x18 h7 y1f ff2 fs2 fc2 sc0 ls0 ws0">on the same geometric space </div><div class="t m0 x19 h7 y20 ff2 fs2 fc0 sc0 ls0 ws0">Regression and feature </div><div class="t m0 x1a h7 y21 ff2 fs2 fc0 sc0 ls0 ws0">selection</div><div class="t m0 xd h7 y22 ff2 fs2 fc0 sc0 ls0 ws0">Probabilities from CNN used to </div><div class="t m0 x13 h7 y23 ff2 fs2 fc0 sc0 ls0 ws0">regress gene expression data</div><div class="t m0 x1b h7 y24 ff2 fs2 fc0 sc0 ls0 ws0">Compression/Cleaning</div><div class="t m0 x1c h7 y25 ff2 fs2 fc0 sc0 ls0 ws0">Decompression</div></div><div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div></div>
+</div>
+<div class="loading-indicator">
+
+</div>
+</body>
+</html>
