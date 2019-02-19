@@ -31,10 +31,10 @@ For my proposed project, I propose to create a surrogate variable dementia using
 5. The model will be tested, and the efficacy will be computed based on probabilities of accurate predictions.  
 
 ##### Healthy brain MRI
-![Image](https://github.com/ameya225/TDI/blob/master/Figures/Normal%20MRI.png)
+![Image](https://github.com/ameya225/TDI/blob/master/Figures/Normal_Brain.png)
 
 ##### Dementia brain MRI
-![Image](https://github.com/ameya225/TDI/blob/master/Figures/AD%20MRI.png)
+![Image](https://github.com/ameya225/TDI/blob/master/Figures/AD_Brain.png)
 
 #### Genetic and Immunohistochemistry steps 
 The entire dataset comprises of 50281 genes from 377 specimens. The 377 specimens are obtained from 107 unique donors. The gene x donor matrix consists of FPKM-Normalized values (fragment-per-kilobase-per-million). FPKM normalization is a way to normalize gene expression data by gene length (in kilobases) and sequencing library size (total number of RNA molecules sequenced).
